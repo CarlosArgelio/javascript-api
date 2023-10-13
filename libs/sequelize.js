@@ -11,12 +11,4 @@ const sequelize = new Sequelize(URI, {
   logging: true
 });
 
-const getDatabases = async () => {
-  var q = "SELECT * FROM hello"
-  let [data, metadata] = await sequelize.query(q)
-  return {data, metadata}
-}
-
-console.log(getDatabases())
-
 module.exports = sequelize
