@@ -1,16 +1,13 @@
-version: '3.1'
-volumes:
-  data:
+version: '3.3'
+
 services:
-  db:
-    image: mariadb
-    restart: always
+  postgres:
+    image: postgres:13
     environment:
-      MYSQL_ROOT_PASSWORD: "${DOCKER_MYSQL_PASSWORD}"
-      MYSQL_DATABASE: "${DOCKER_MYSQL_DATABASE}"
-      MYSQL_USER: "${DOCKER_MYSQL_USER}"
-      MYSQL_PASSWORD: "${DOCKER_MYSQL_PASSWORD}"
-    volumes:
-      - data:/var/lib/mysql
+      - POSTGRES_DB=mydatabase
+      - POSTGRES_USER=root
+      - POSTGRES_PASSWORD=password
     ports:
-      - "${DB_PORT}:${DB_PORT}"
+      - 5432:5432
+    volumes:
+      - ./postgres_data:/var/lib/postgresql/data
