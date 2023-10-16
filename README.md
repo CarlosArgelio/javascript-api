@@ -9,5 +9,5 @@ Connect to DB
 exec commnad
 
 ```
-docker-compose exec db bash
+docker-compose exec postgres bash
 ```
