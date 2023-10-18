@@ -69,6 +69,12 @@ class Recipe extends Model {
     this.belongsTo(models.User, {
       as: 'user'
     });
+    this.belongsToMany(models.Tag, {
+      as: 'recipe_tag',
+      through: models.RecipeTag,
+      foreignKey: 'recipeId',
+      otherKey: 'tagId'
+    });
   }
 
   static config(sequelize) {
