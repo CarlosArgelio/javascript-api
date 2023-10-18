@@ -66,6 +66,9 @@ class Recipe extends Model {
     this.belongsTo(models.Category, {
       as: 'category'
     });
+    this.belongsTo(models.User, {
+      as: 'user'
+    });
   }
 
   static config(sequelize) {
