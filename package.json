@@ -10,8 +10,11 @@
     "migrations:generate": "sequelize-cli migration:generate --name",
     "migrations:run": "sequelize-cli db:migrate",
     "migrations:revert": "sequelize-cli db:migrate:undo",
+    "migrations:delete": "sequelize-cli db:migrate:undo:all",
     "seed:generate": "npx sequelize-cli seed:generate --name",
-    "seed:run": "npx sequelize-cli db:seed:all"
+    "seed:run": "npx sequelize-cli db:seed:all",
+    "seed:revert": "npx sequelize-cli db:seed:undo --seed",
+    "seed:delete": "npx sequelize-cli db:seed:undo:all"
   },
   "keywords": [],
   "author": "",
