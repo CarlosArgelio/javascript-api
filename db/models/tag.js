@@ -1,8 +1,8 @@
 const { Model, DataTypes, Sequelize } = require('sequelize');
 
-const CATEGORY_TABLE = 'categories';
+const TAG_TABLE = 'tags';
 
-const CategorySchema = {
+const TagSchema = {
   id: {
     allowNull: false,
     primaryKey: true,
@@ -25,7 +25,7 @@ const CategorySchema = {
   }
 }
 
-class Category extends Model {
+class Tag extends Model {
   static associate() {
     // associate
   }
@@ -33,12 +33,12 @@ class Category extends Model {
   static config(sequelize) {
     return {
       sequelize,
-      tableName: CATEGORY_TABLE,
-      modelName: 'Category',
+      tableName: TAG_TABLE,
+      modelName: 'Tag',
       timestamps: false
     }
   }
 }
 
 
-module.exports = { CATEGORY_TABLE, CategorySchema, Category }
+module.exports = { TAG_TABLE, TagSchema, Tag }

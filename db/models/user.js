@@ -1,8 +1,8 @@
 const { Model, DataTypes, Sequelize } = require('sequelize');
 
-const CATEGORY_TABLE = 'categories';
+const USER_TABLE = 'users';
 
-const CategorySchema = {
+const UserSchema = {
   id: {
     allowNull: false,
     primaryKey: true,
@@ -10,7 +10,22 @@ const CategorySchema = {
   },
   name: {
     allowNull: false,
-    type: DataTypes.STRING
+    type: DataTypes.STRING,
+  },
+  email: {
+    allowNull: false,
+    type: DataTypes.STRING,
+    unique: true
+  },
+  emailVerifiedAt: {
+    allowNull: true,
+    type: DataTypes.BOOLEAN,
+    field: 'email_verified_at'
+  },
+  rememberToken: {
+    allowNull: true,
+    type: DataTypes.STRING,
+    field: 'remember_token'
   },
   createdAt: {
     allowNull: false,
@@ -25,7 +40,7 @@ const CategorySchema = {
   }
 }
 
-class Category extends Model {
+class User extends Model {
   static associate() {
     // associate
   }
@@ -33,12 +48,12 @@ class Category extends Model {
   static config(sequelize) {
     return {
       sequelize,
-      tableName: CATEGORY_TABLE,
-      modelName: 'Category',
+      tableName: USER_TABLE,
+      modelName: 'User',
       timestamps: false
     }
   }
 }
 
 
-module.exports = { CATEGORY_TABLE, CategorySchema, Category }
+module.exports = { USER_TABLE, UserSchema, User }
