@@ -2,21 +2,21 @@ const { faker } = require('@faker-js/faker');
 const { v4: uuidv4 } = require('uuid');
 
 
-const generateOneCategory = () => ({
+const generateOneTag = () => ({
   id: uuidv4(),
   name: faker.commerce.productMaterial(),
   createdAt: faker.date.anytime(),
   updatedAt: faker.date.anytime()
 });
 
-const generateManyCategory = (size) => {
+const generateManyTag = (size) => {
   const limit = size ?? 10;
-  const fakeCategory = [];
+  const fakeTag = [];
 
   for (let i = 0; i < limit; i += 1) {
-    fakeCategory.push(generateOneBook());
+    fakeTag.push(generateOneBook());
   }
-  return [...fakeCategory];
+  return [...fakeTag];
 };
 
-module.exports = { generateOneCategory, generateManyCategory };
+module.exports = { generateOneTag, generateManyTag };
