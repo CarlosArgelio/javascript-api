@@ -1,8 +1,8 @@
-import { User, UserSchema } from './user';
-import { Category, CategorySchema } from './category';
-import { Recipe, RecipeSchema } from './recipe';
-import { Tag, TagSchema } from './tag';
-import { RecipeTag, RecipeTagSchema } from './recipe.tag';
+const { User, UserSchema } = require('./user');
+const { Category, CategorySchema } = require('./category');
+const { Recipe, RecipeSchema } = require('./recipe');
+const { Tag, TagSchema } = require('./tag');
+const { RecipeTag, RecipeTagSchema } = require('./recipe.tag');
 
 
 function setupModels(sequelize) {
