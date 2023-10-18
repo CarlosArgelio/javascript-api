@@ -62,8 +62,10 @@ const RecipeSchema = {
 }
 
 class Recipe extends Model {
-  static associate() {
-    // associate
+  static associate(models) {
+    this.belongsTo(models.Category, {
+      as: 'category'
+    });
   }
 
   static config(sequelize) {
