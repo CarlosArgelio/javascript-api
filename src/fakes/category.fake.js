@@ -1,5 +1,5 @@
-const { faker } = require('@faker-js/faker');
-const { v4: uuidv4 } = require('uuid');
+import { faker } from '@faker-js/faker'
+import { v4 as uuidv4 } from 'uuid';
 
 
 const generateOneCategory = () => ({
