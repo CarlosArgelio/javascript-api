@@ -11,6 +11,12 @@ function setupModels(sequelize) {
   Recipe.init(RecipeSchema, Recipe.config(sequelize));
   Tag.init(TagSchema, Tag.config(sequelize));
   RecipeTag.init(RecipeTagSchema, RecipeTag.config(sequelize));
+
+  User.associate(sequelize.models);
+  Category.associate(sequelize.models);
+  Recipe.associate(sequelize.models);
+  Tag.associate(sequelize.models);
+  RecipeTag.associate(sequelize.models);
 };
 
 module.exports = setupModels;
