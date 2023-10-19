@@ -1,22 +1,65 @@
-// const { faker } = require('@faker-js/faker');
-// const { v4: uuidv4 } = require('uuid');
+const { models } = require('../../libs/sequelize')
+const { v4: uuidv4 } = require('uuid');
+
+let recipeListId = [];
+let tagListId = [];
+
+const findRecipe = async () => {
+  const recipeId = await models.Recipe.findAll();
+  return recipeId
+};
+
+const findTag = async () => {
+  const tagId = await models.Tag.findAll();
+  return tagId
+};
+
+findTag()
+  .then( (tags) => {
+    for (const tag of tags) {
+      const tagId = tag.dataValues.id;
+      tagListId.push(tagId)
+    }
+    const indexRandomTag = Math.floor(Math.random() * tagListId.length);
+    console.log(tagListId[indexRandomTag]);
+});
 
 
-// const generateOneTag = () => ({
-//   id: uuidv4(),
-//   name: faker.commerce.productMaterial(),
-//   createdAt: faker.date.anytime(),
-//   updatedAt: faker.date.anytime()
-// });
+const generateOneTag = async() => {
+  await findTag()
+    .then( (tags) => {
+      for (const tag of tags) {
+        const tagId = tag.dataValues.id;
+        tagListId.push(tagId)
+      }
+  });
 
-// const generateManyTag = (size) => {
-//   const limit = size ?? 10;
-//   const fakeTag = [];
+  await findRecipe()
+    .then( (recipes) => {
+      for (const recipe of recipes) {
+        const recipeId = recipe.dataValues.id;
+        recipeListId.push(recipeId)
+      }
+  });
 
-//   for (let i = 0; i < limit; i += 1) {
-//     fakeTag.push(generateOneBook());
-//   }
-//   return [...fakeTag];
-// };
+  const indexRandomTag = Math.floor(Math.random() * tagListId.length);
+  const indexRandomRecipe = Math.floor(Math.random() * recipeListId.length);
 
-// module.exports = { generateOneTag, generateManyTag };
+  return {
+    id: uuidv4(),
+    recipeId: recipeListId[indexRandomRecipe],
+    tagId: tagListId[indexRandomTag],
+  }
+};
+
+const generateManyTag = (size) => {
+  const limit = size ?? 10;
+  const fakeTag = [];
+
+  for (let i = 0; i < limit; i += 1) {
+    fakeTag.push(generateOneBook());
+  }
+  return [...fakeTag];
+};
+
+module.exports = { generateOneTag, generateManyTag };
