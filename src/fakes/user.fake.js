@@ -6,10 +6,10 @@ const generateOneUser = () => ({
   id: uuidv4(),
   name: faker.person.firstName(),
   email: faker.internet.email(),
-  emailVerifiedAt: faker.datatype.boolean(),
+  email_verified_at: faker.datatype.boolean(),
   // rememberToken: ,
-  createdAt: faker.date.anytime(),
-  updatedAt: faker.date.anytime()
+  create_at: faker.date.anytime(),
+  updated_at: faker.date.anytime()
 });
 
 const generateManyUser = (size) => {

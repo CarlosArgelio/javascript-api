@@ -25,7 +25,7 @@ findTag()
 });
 
 
-const generateOneTag = async() => {
+const generateOneRecipeTag = async() => {
   await findTag()
     .then( (tags) => {
       for (const tag of tags) {
@@ -47,19 +47,19 @@ const generateOneTag = async() => {
 
   return {
     id: uuidv4(),
-    recipeId: recipeListId[indexRandomRecipe],
-    tagId: tagListId[indexRandomTag],
+    recipe_id: recipeListId[indexRandomRecipe],
+    tag_id: tagListId[indexRandomTag],
   }
 };
 
-const generateManyTag = (size) => {
+const generateManyRecipeTag = (size) => {
   const limit = size ?? 10;
   const fakeTag = [];
 
   for (let i = 0; i < limit; i += 1) {
-    fakeTag.push(generateOneBook());
+    fakeTag.push(generateOneRecipeTag());
   }
   return [...fakeTag];
 };
 
-module.exports = { generateOneTag, generateManyTag };
+module.exports = { generateOneRecipeTag, generateManyRecipeTag };

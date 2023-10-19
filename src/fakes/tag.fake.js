@@ -5,8 +5,8 @@ const { v4: uuidv4 } = require('uuid');
 const generateOneTag = () => ({
   id: uuidv4(),
   name: faker.commerce.productMaterial(),
-  createdAt: faker.date.anytime(),
-  updatedAt: faker.date.anytime()
+  create_at: faker.date.anytime(),
+  updated_at: faker.date.anytime()
 });
 
 const generateManyTag = (size) => {
@@ -14,7 +14,7 @@ const generateManyTag = (size) => {
   const fakeTag = [];
 
   for (let i = 0; i < limit; i += 1) {
-    fakeTag.push(generateOneBook());
+    fakeTag.push(generateOneTag());
   }
   return [...fakeTag];
 };

@@ -5,8 +5,8 @@ const { v4: uuidv4 } = require('uuid');
 const generateOneCategory = () => ({
   id: uuidv4(),
   name: faker.commerce.productMaterial(),
-  createdAt: faker.date.anytime(),
-  updatedAt: faker.date.anytime()
+  create_at: faker.date.anytime(),
+  updated_at: faker.date.anytime()
 });
 
 const generateManyCategory = (size) => {
@@ -14,7 +14,7 @@ const generateManyCategory = (size) => {
   const fakeCategory = [];
 
   for (let i = 0; i < limit; i += 1) {
-    fakeCategory.push(generateOneBook());
+    fakeCategory.push(generateOneCategory());
   }
   return [...fakeCategory];
 };
