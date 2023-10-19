@@ -17,7 +17,7 @@ const generateManyUser = (size) => {
   const fakeUSers = [];
 
   for (let i = 0; i < limit; i += 1) {
-    fakeUSers.push(generateOneBook());
+    fakeUSers.push(generateOneUser());
   }
   return [...fakeUSers];
 };
