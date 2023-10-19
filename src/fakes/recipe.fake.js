@@ -7,21 +7,46 @@ let categoryListId = [];
 let userListId = [];
 
 const findCategory = async () => {
-  const categoryId = await models.Category.findAll()
-  return categoryId
+  const categoryId = await models.Category.findAll();
+  return categoryId;
 };
 
 const findUser = async () => {
-  const userId = await models.User.findAll()
-  return userId
+  const userId = await models.User.findAll();
+  return userId;
 };
 
-const generateOneRecipe = async() => {
+const generateOneRecipe = async () => {
+  const indexRandomCategory = Math.floor(Math.random() * categoryListId.length);
+  const indexRandomUSer = Math.floor(Math.random() * userListId.length);
+
+  const object = {
+    id: uuidv4(),
+    category_id: categoryListId[indexRandomCategory],
+    user_id: userListId[indexRandomUSer],
+    title: faker.person.jobTitle(),
+    description: faker.commerce.productDescription(),
+    ingredients: faker.commerce.productDescription(),
+    instructions: faker.commerce.productDescription(),
+    image: faker.image.url(),
+    create_at: faker.date.anytime(),
+    updated_at: faker.date.anytime()
+  }
+
+  return object
+};
+
+const generateManyRecipe = async (size) => {
+  const limit = size ?? 10;
+  const fakeRecipe = [];
+
   await findCategory()
     .then( (categories) => {
       for ( const category of categories ) {
         const categoryId = category.dataValues.id;
-        categoryListId.push(categoryId)
+        if (!categoryListId.includes(categoryId)) {
+          categoryListId.push(categoryId);
+        }
       };
     });
 
@@ -29,38 +54,26 @@ const generateOneRecipe = async() => {
     .then( (users) => {
       for ( const user of users ) {
         const userId = user.dataValues.id;
-        userListId.push(userId)
+        if (!userListId.includes(userId)) {
+          userListId.push(userId);
+        }
       };
     });
-
-    const indexRandomCategory = Math.floor(Math.random() * categoryListId.length);
-    const indexRandomUSer = Math.floor(Math.random() * userListId.length);
-
-  return {
-    id: uuidv4(),
-    categoryId: categoryListId[indexRandomCategory],
-    userId: userListId[indexRandomUSer],
-    title: faker.person.jobTitle(),
-    description: faker.commerce.productDescription(),
-    ingredients: faker.commerce.productDescription(),
-    instructions: faker.commerce.productDescription(),
-    image: faker.image.url(),
-    createdAt: faker.date.anytime(),
-    updatedAt: faker.date.anytime()
-  }
-};
-
-const generateManyRecipe = (size) => {
-  const limit = size ?? 10;
-  const fakeRecipe = [];
 
   for (let i = 0; i < limit; i += 1) {
     fakeRecipe.push(generateOneRecipe());
   }
-  return [...fakeRecipe];
+  // console.log([...fakeRecipe]);
+  var myRecipes = null;
+  await Promise.all(fakeRecipe)
+  .then(results => {
+    const objects = results.map(result => result);
+    myRecipes = objects
+  })
+  .catch(error => {
+    console.error(error);
+  });
+  return myRecipes;
 };
 
-// find()
-//   .then((resp) => {
-//     console.log(resp[0].dataValues.id);
-//   });
+module.exports = { generateOneRecipe, generateManyRecipe };
