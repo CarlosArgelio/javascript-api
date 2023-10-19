@@ -1,25 +1,14 @@
-'use strict';
+const { generateManyRecipe } = require('../../src/fakes/recipe.fake');
 
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up (queryInterface, Sequelize) {
-    /**
-     * Add seed commands here.
-     *
-     * Example:
-     * await queryInterface.bulkInsert('People', [{
-     *   name: 'John Doe',
-     *   isBetaMember: false
-     * }], {});
-    */
+    let recipes = await generateManyRecipe().then( (resp) => { return resp })
+    console.log(recipes);
+    await queryInterface.bulkInsert('recipes', recipes);
   },
 
   async down (queryInterface, Sequelize) {
-    /**
-     * Add commands to revert seed here.
-     *
-     * Example:
-     * await queryInterface.bulkDelete('People', null, {});
-     */
+    await queryInterface.bulkDelete('recipes', null, {});
   }
 };
