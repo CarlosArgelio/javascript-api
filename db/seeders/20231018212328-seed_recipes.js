@@ -4,7 +4,6 @@ const { generateManyRecipe } = require('../../src/fakes/recipe.fake');
 module.exports = {
   async up (queryInterface, Sequelize) {
     let recipes = await generateManyRecipe().then( (resp) => { return resp })
-    console.log(recipes);
     await queryInterface.bulkInsert('recipes', recipes);
   },
 

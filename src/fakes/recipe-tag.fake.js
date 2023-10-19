@@ -14,18 +14,22 @@ const findTag = async () => {
   return tagId
 };
 
-findTag()
-  .then( (tags) => {
-    for (const tag of tags) {
-      const tagId = tag.dataValues.id;
-      tagListId.push(tagId)
-    }
-    const indexRandomTag = Math.floor(Math.random() * tagListId.length);
-    console.log(tagListId[indexRandomTag]);
-});
+const generateOneRecipeTag = async () => {
 
+  const indexRandomTag = Math.floor(Math.random() * tagListId.length);
+  const indexRandomRecipe = Math.floor(Math.random() * recipeListId.length);
 
-const generateOneRecipeTag = async() => {
+  return {
+    id: uuidv4(),
+    recipe_id: recipeListId[indexRandomRecipe],
+    tag_id: tagListId[indexRandomTag],
+  }
+};
+
+const generateManyRecipeTag = async (size) => {
+  const limit = size ?? 10;
+  const fakeTag = [];
+
   await findTag()
     .then( (tags) => {
       for (const tag of tags) {
@@ -42,24 +46,22 @@ const generateOneRecipeTag = async() => {
       }
   });
 
-  const indexRandomTag = Math.floor(Math.random() * tagListId.length);
-  const indexRandomRecipe = Math.floor(Math.random() * recipeListId.length);
-
-  return {
-    id: uuidv4(),
-    recipe_id: recipeListId[indexRandomRecipe],
-    tag_id: tagListId[indexRandomTag],
-  }
-};
-
-const generateManyRecipeTag = (size) => {
-  const limit = size ?? 10;
-  const fakeTag = [];
-
   for (let i = 0; i < limit; i += 1) {
     fakeTag.push(generateOneRecipeTag());
   }
-  return [...fakeTag];
+  var myRecipeTag = null;
+  await Promise.all(fakeTag)
+  .then(results => {
+    const objects = results.map(result => result);
+    myRecipeTag = objects
+  })
+  .catch(error => {
+    console.error(error);
+  });
+  return myRecipeTag;
 };
-
+// generateManyRecipeTag()
+//   .then( (resp) => {
+//     console.log(resp);
+//   })
 module.exports = { generateOneRecipeTag, generateManyRecipeTag };
