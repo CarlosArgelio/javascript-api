@@ -7,5 +7,8 @@ module.exports = {
     user: process.env.DOCKER_USER,
     password: process.env.DOCKER_PASSWORD,
     database: process.env.DOCKER_DATABASE,
+  },
+  api: {
+    port: process.env.API_PORT
   }
 }
