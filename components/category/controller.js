@@ -13,7 +13,13 @@ module.exports = function (injectedStore) {
     return resp
   }
 
+  async function show(id) {
+    const resp = await store.show(id, model);
+    return resp
+  }
+
   return {
-    index
+    index,
+    show
   }
 }

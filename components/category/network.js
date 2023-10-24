@@ -13,13 +13,17 @@ async function index(req, res) {
     const resp = await controller.index()
     response.success(req, res, resp, 200);
   } catch ( err ) {
-    response.error(req, res, err, 409)
+    response.error(req, res, err, 400)
   }
 };
 
-function show(req, res) {
-  const categorId = req;
-  response.success(req, res, 'Succesfuly', 200);
+async function show(req, res) {
+  try {
+    const resp = await controller.show(req.params.category)
+    response.success(req, res, resp, 200);
+  } catch ( err ) {
+    response.error(req, res, err, 400)
+  }
 };
 
 module.exports = router;
