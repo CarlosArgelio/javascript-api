@@ -1,14 +1,20 @@
 const express = require('express');
 
 const response = require('../../middlewares/response');
+const controller = require('./index');
 
 const router = express.Router();
 
 router.get('/',  index);
 router.get('/:category', show);
 
-function index(req, res) {
-  response.success(req, res, 'Succesfuly', 200);
+async function index(req, res) {
+  try {
+    const resp = await controller.index()
+    response.success(req, res, resp, 200);
+  } catch ( err ) {
+    response.error(req, res, err, 409)
+  }
 };
 
 function show(req, res) {
