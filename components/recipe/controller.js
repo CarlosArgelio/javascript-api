@@ -9,12 +9,16 @@ module.exports = function (injectedStore) {
   let model = models.Recipe
 
   async function index() {
-    const resp = await store.index(model);
+    let params = {}
+    params['include'] = ['category', 'recipe_tag', 'user']
+    const resp = await store.index(model, params);
     return resp
   }
 
   async function show(id) {
-    const resp = await store.show(id, model);
+    let params = {}
+    params['include'] = ['category', 'recipe_tag', 'user']
+    const resp = await store.show(id, model, params);
     return resp
   }
 
