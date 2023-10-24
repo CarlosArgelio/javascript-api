@@ -17,6 +17,8 @@ async function index(req, res) {
   }
 };
 
+async function create(req, res) { }
+
 async function show(req, res) {
   try {
     console.log('response => ', req.params.tag);
@@ -26,5 +28,9 @@ async function show(req, res) {
     response.error(req, res, err, 400)
   }
 };
+
+async function update(req, res) { }
+
+async function remove(req, res) { }
 
 module.exports = router;

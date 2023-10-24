@@ -14,14 +14,23 @@ module.exports = function (injectedStore) {
     return resp
   }
 
+  async function create() { }
+
   async function show(id) {
     let params = {}
     const resp = await store.show(id, model, params);
     return resp
   }
 
+  async function update() { }
+
+  async function remove() { }
+
   return {
     index,
-    show
+    show,
+    create,
+    update,
+    remove
   }
 }

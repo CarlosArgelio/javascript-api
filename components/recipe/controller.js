@@ -15,6 +15,8 @@ module.exports = function (injectedStore) {
     return resp
   }
 
+  async function create() { }
+
   async function show(id) {
     let params = {}
     params['include'] = ['category', 'recipe_tag', 'user']
@@ -22,8 +24,15 @@ module.exports = function (injectedStore) {
     return resp
   }
 
+  async function update() { }
+
+  async function remove() { }
+
   return {
     index,
-    show
+    show,
+    create,
+    update,
+    remove
   }
 }
