@@ -5,8 +5,14 @@ async function create(data, model) {
 }
 
 // Find all register in DB
-async function find(model) {
-  const findRegister = await model.findAll();
+async function find(model, paramsQuery) {
+  let params = {}
+
+  if ( 'include' in paramsQuery ) {
+    params['include'] = paramsQuery.include
+  }
+
+  const findRegister = await model.findAll(params);
   return findRegister
 }
 
@@ -17,7 +23,7 @@ async function findOne(id, model, paramsQuery) {
   if ( 'include' in paramsQuery ) {
     params['include'] = paramsQuery.include
   }
-  console.log('params sent ', params);
+
   const findOneRegister = await model.findByPk(id, params);
   return findOneRegister
 }
