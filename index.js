@@ -1,4 +1,3 @@
-const listEndpoints = require('express-list-endpoints');
 const express = require('express');
 
 const config = require('./config');
@@ -17,10 +16,8 @@ app.use('/api/v1/recipes', recipe);
 // tags
 app.use('/api/v1/tags', tag);
 
-console.log(listEndpoints(app));
-
 app.listen(config.api.port, () => {
   console.log('Listen API that port ', config.api.port);
 });
 
-module.exports = app
+module.exports = { app }
