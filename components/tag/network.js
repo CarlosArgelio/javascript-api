@@ -18,7 +18,6 @@ async function index(req, res) {
 };
 
 async function show(req, res) {
-  console.log('HOLAA');
   try {
     console.log('response => ', req.params.tag);
     const resp = await controller.show(req.params.tag)

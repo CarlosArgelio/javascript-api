@@ -9,7 +9,8 @@ module.exports = function (injectedStore) {
   let model = models.Category
 
   async function index() {
-    const resp = await store.index(model);
+    let params = {}
+    const resp = await store.index(model, params);
     return resp
   }
 

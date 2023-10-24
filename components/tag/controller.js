@@ -9,12 +9,14 @@ module.exports = function (injectedStore) {
   let model = models.Tag
 
   async function index() {
-    const resp = await store.index(model);
+    let params = {}
+    const resp = await store.index(model, params);
     return resp
   }
 
   async function show(id) {
-    const resp = await store.show(id, model);
+    let params = {}
+    const resp = await store.show(id, model, params);
     return resp
   }
 
