@@ -14,7 +14,9 @@ module.exports = function (injectedStore) {
   }
 
   async function show(id) {
-    const resp = await store.show(id, model);
+    let params = {}
+    params['include'] = ['recipes']
+    const resp = await store.show(id, model, params);
     return resp
   }
 
