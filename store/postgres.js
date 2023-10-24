@@ -11,8 +11,14 @@ async function find(model) {
 }
 
 // Find one register in DB
-async function findOne(id, model) {
-  const findOneRegister = await model.findByPk(id);
+async function findOne(id, model, paramsQuery) {
+  let params = {}
+
+  if ( 'include' in paramsQuery ) {
+    params['include'] = paramsQuery.include
+  }
+  console.log('params sent ', params);
+  const findOneRegister = await model.findByPk(id, params);
   return findOneRegister
 }
 
