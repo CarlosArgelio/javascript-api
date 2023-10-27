@@ -6,11 +6,7 @@ async function create(data, model) {
 
 // Find all register in DB
 async function find(model, paramsQuery) {
-  let params = {}
-
-  if ( 'include' in paramsQuery ) {
-    params['include'] = paramsQuery.include
-  }
+  let params = paramsQuery ? paramsQuery : {}
 
   const findRegister = await model.findAll(params);
   return findRegister
@@ -18,11 +14,7 @@ async function find(model, paramsQuery) {
 
 // Find one register in DB
 async function findOne(id, model, paramsQuery) {
-  let params = {}
-
-  if ( 'include' in paramsQuery ) {
-    params['include'] = paramsQuery.include
-  }
+  let params = paramsQuery ? paramsQuery : {}
 
   const findOneRegister = await model.findByPk(id, params);
   return findOneRegister

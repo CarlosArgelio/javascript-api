@@ -1,5 +1,4 @@
 const { models } = require('../../libs/sequelize');
-// const CategoryResource = require('./resource');
 
 module.exports = function (injectedStore) {
   let store = injectedStore;
@@ -10,24 +9,56 @@ module.exports = function (injectedStore) {
   let modelName = models.Category
 
   async function index() {
-    let params = {}
+    let params = {
+      attributes: {
+        exclude: ['createdAt', 'updatedAt'],
+      },
+      include: ['recipes'],
+    }
     const resp = await store.index(modelName, params);
-    return resp
+    // console.log(resp);
+    console.log(resp.length);
+
+    let response = [];
+
+    for (let i = 0; i < resp.length; i++) {
+      response.push({
+        id: resp[i].dataValues.id,
+        type: "category",
+        attributes: {
+          name: resp[i].dataValues.name
+        },
+        relationships: {
+          recipes: resp[i].recipes
+        },
+      })
+    }
+
+    return response
   }
 
   async function create() { }
 
   async function show(id) {
-    // let params = {}
-    // params['include'] = ['recipes']
-
     let params = {
-      include: [],
-      attributes: ['name']
+      attributes: {
+        exclude: ['createdAt', 'updatedAt'],
+      },
+      include: ['recipes'],
     }
 
-    const resp = await store.show(id, modelName, params);
-    return resp
+    const query = await store.show(id, modelName, params);
+    const response = {
+      id: query.dataValues.id,
+      type: "category",
+      attributes: {
+        name: query.dataValues.name
+      },
+      relationships: {
+        recipes: query.recipes
+      },
+    }
+    return response
   }
 
   async function update() { }
