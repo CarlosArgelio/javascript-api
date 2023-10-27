@@ -12,8 +12,7 @@ module.exports = function (injectedStore) {
     let params = {
       attributes: {
         exclude: ['createdAt', 'updatedAt'],
-      },
-      include: ['recipes'],
+      }
     }
     const resp = await store.index(modelName, params);
     // console.log(resp);
@@ -27,9 +26,6 @@ module.exports = function (injectedStore) {
         type: "category",
         attributes: {
           name: resp[i].dataValues.name
-        },
-        relationships: {
-          recipes: resp[i].recipes
         },
       })
     }
